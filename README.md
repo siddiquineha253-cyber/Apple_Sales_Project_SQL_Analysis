@@ -115,7 +115,7 @@ The project is split into three tiers of questions to test SQL skills of increas
 					   RIGHT JOIN warranty AS w
                        ON s.sale_id = w.sale_id
 					   );
-    ```
+```
    
 5. Calculate the percentage of warranty claims marked as "Warranty Void".
 8. Identify which store had the highest total units sold in the last year.
