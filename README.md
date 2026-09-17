@@ -86,8 +86,8 @@ The project is split into three tiers of questions to test SQL skills of increas
            
    
 3. Calculate the total number of units sold by each store.
-4. ```sql
-SELECT 
+ ```sql
+ SELECT 
    s.store_id,
    st.store_name,
    SUM(s.quantity) AS total_unit_sold
