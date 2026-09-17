@@ -86,14 +86,25 @@ The project is split into three tiers of questions to test SQL skills of increas
            
    
 3. Calculate the total number of units sold by each store.
-4. Identify how many sales occurred in December 2023.
-5. Determine how many stores have never had a warranty claim filed.
-6. Calculate the percentage of warranty claims marked as "Warranty Void".
-7. Identify which store had the highest total units sold in the last year.
-8. Count the number of unique products sold in the last year.
-9. Find the average price of products in each category.
-10. How many warranty claims were filed in 2020?
-11. For each store, identify the best-selling day based on highest quantity sold.
+4. ```sql
+SELECT 
+s.store_id,
+st.store_name,
+SUM(s.quantity) AS total_unit_sold
+FROM sales AS s
+JOIN stores AS st ON st.store_id = s.store_id
+GROUP BY 1,2
+ORDER BY 3 DESC;
+```
+   
+5. Identify how many sales occurred in December 2023.
+6. Determine how many stores have never had a warranty claim filed.
+7. Calculate the percentage of warranty claims marked as "Warranty Void".
+8. Identify which store had the highest total units sold in the last year.
+9. Count the number of unique products sold in the last year.
+10. Find the average price of products in each category.
+11. How many warranty claims were filed in 2020?
+12. For each store, identify the best-selling day based on highest quantity sold.
 
 ### Medium to Hard (5 Questions)
 
