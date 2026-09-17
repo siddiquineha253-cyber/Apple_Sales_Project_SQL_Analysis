@@ -1,4 +1,4 @@
-# Apple_Sales_Project_SQL_Analysis
+#Apple_Sales_Project_SQL_Analysis
 
 # ![Apple Logo](https://github.com/najirh/Apple-Retail-Sales-SQL-Project---Analyzing-Millions-of-Sales-Rows/blob/main/Apple_Changsha_RetailTeamMembers_09012021_big.jpg.slideshow-xlarge_2x.jpg) Apple Retail Sales SQL Project - Analyzing Millions of Sales Rows
 
@@ -76,22 +76,23 @@ The project is split into three tiers of questions to test SQL skills of increas
 ### Easy to Medium (10 Questions)
 
 1. Find the number of stores in each country.
-   ```sql
-    SELECT 
+2. ```sql
+   SELECT 
 country,COUNT(store_id) AS total_stores
 FROM stores
 GROUP BY 1
 ORDER BY 2 DESC
 ```
-7. Calculate the total number of units sold by each store.
-8. Identify how many sales occurred in December 2023.
-9. Determine how many stores have never had a warranty claim filed.
-10. Calculate the percentage of warranty claims marked as "Warranty Void".
-11. Identify which store had the highest total units sold in the last year.
-12. Count the number of unique products sold in the last year.
-13. Find the average price of products in each category.
-14. How many warranty claims were filed in 2020?
-15. For each store, identify the best-selling day based on highest quantity sold.
+   
+3. Calculate the total number of units sold by each store.
+4. Identify how many sales occurred in December 2023.
+5. Determine how many stores have never had a warranty claim filed.
+6. Calculate the percentage of warranty claims marked as "Warranty Void".
+7. Identify which store had the highest total units sold in the last year.
+8. Count the number of unique products sold in the last year.
+9. Find the average price of products in each category.
+10. How many warranty claims were filed in 2020?
+11. For each store, identify the best-selling day based on highest quantity sold.
 
 ### Medium to Hard (5 Questions)
 
