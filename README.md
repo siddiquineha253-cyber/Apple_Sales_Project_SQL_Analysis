@@ -119,16 +119,61 @@ The project is split into three tiers of questions to test SQL skills of increas
    
 5. Calculate the percentage of warranty claims marked as "Warranty Void".
  ```sql
-   SELECT ROUND(COUNT(claim_id)/(SELECT COUNT(*) FROM warranty)::numeric * 100,2) AS warranty_void_per
-FROM warranty
-WHERE repair_status = 'Warranty Void';
+	SELECT ROUND(COUNT(claim_id)/(SELECT COUNT(*) FROM warranty)::numeric * 100,2) AS warranty_void_per
+	FROM warranty
+	WHERE repair_status = 'Warranty Void';
 ```
 6. Identify which store had the highest total units sold in the last year.
-9. Count the number of unique products sold in the last year.
-10. Find the average price of products in each category.
-11. How many warranty claims were filed in 2020?
-12. For each store, identify the best-selling day based on highest quantity sold.
-
+ ```sql
+   SELECT
+	s.store_id,
+	st.store_name,
+	SUM(quantity)
+	FROM sales AS s
+	JOIN stores AS st
+	ON s.store_id =st.store_id
+	WHERE sale_date >=(CURRENT_DATE - INTERVAL '1 year')
+	GROUP BY 1,2
+	ORDER BY 2 DESC LIMIT 1
+```
+7. Count the number of unique products sold in the last year.
+ ```sql
+   SELECT
+	COUNT(DISTINCT product_id)
+	FROM sales 
+	WHERE sale_date >=(CURRENT_DATE - INTERVAL '1 year')
+```
+8. Find the average price of products in each category.
+ ```sql
+   SELECT 
+	p.category_id,
+	c.category_name,
+	AVG(p.price)AS avg_price
+	FROM products AS p
+	JOIN category AS c
+	ON p.category_id = c.category_id
+	GROUP BY 1,2
+	ORDER BY 3 DESC
+```
+9. How many warranty claims were filed in 2020?
+ ```sql
+    SELECT 
+	COUNT(*) AS warranty_claim
+	FROM warranty
+	WHERE EXTRACT(YEAR FROM claim_date)=2026
+ ```
+10. For each store, identify the best-selling day based on highest quantity sold.
+    ```sql
+    SELECT * FROM
+                (SELECT
+                  store_id,TO_CHAR(sale_date,'Day')AS day_name,
+                  SUM(quantity) AS total_unit_sold,
+                  RANK()OVER(PARTITION BY store_id ORDER BY SUM(quantity)DESC)AS rank
+                  FROM sales
+                  GROUP BY 1,2
+				  ) as t1
+				  WHERE rank = 1
+    ```
 ### Medium to Hard (5 Questions)
 
 11. Identify the least selling product in each country for each year based on total units sold.
