@@ -177,11 +177,75 @@ The project is split into three tiers of questions to test SQL skills of increas
 ### Medium to Hard (5 Questions)
 
 11. Identify the least selling product in each country for each year based on total units sold.
+ ```sql
+    WITH productt_rank AS
+	(SELECT
+	st.country,
+	p.product_name,
+	SUM(s.quantity)AS tatal_qty_sold,
+	RANK()OVER(PARTITION BY st.country ORDER BY SUM(s.quantity))AS rank
+	FROM sales as s
+	JOIN stores as st
+	ON s.store_id = st.store_id
+	JOIN products as p
+	ON s.product_id = p.product_id
+	GROUP BY 1,2
+	)
+	SELECT * FROM productt_rank
+	WHERE rank = 1
+```
 12. Calculate how many warranty claims were filed within 180 days of a product sale.
+ ```sql
+    SELECT COUNT(*)
+	FROM warranty as w
+	LEFT JOIN sales as s
+	ON s.sale_id = w.sale_id
+	WHERE w.claim_date - sale_date<=180
+```
 13. Determine how many warranty claims were filed for products launched in the last two years.
+ ```sql
+    SELECT
+	p.product_name,
+	COUNT(w.claim_id)as no_claim,
+	COUNT(s.sale_id)
+	FROM warranty as w
+	RIGHT JOIN
+	sales as s
+	ON s.sale_id = w.sale_id
+	JOIN products as p
+	ON p.product_id = s.product_id
+	WHERE p.launch_date >= CURRENT_DATE - INTERVAL '2 years'
+	GROUP BY 1
+	HAVING COUNT(w.claim_id)>0
+```
 14. List the months in the last three years where sales exceeded 5,000 units in the USA.
+ ```sql
+    SELECT 
+	TO_CHAR(sale_date,'MM-YYYY')as month,
+	SUM(s.quantity)as tatal_unit_sold
+	FROM sales as s
+	JOIN stores as st
+	ON s.store_id = st.store_id
+	WHERE st.country = 'USA'
+	AND s.sale_date >= CURRENT_DATE - INTERVAL '3 year'
+	GROUP BY 1
+	HAVING SUM(s.quantity)>5000
+```
 15. Identify the product category with the most warranty claims filed in the last two years.
-
+16. ```sql
+    SELECT
+	c.category_name,
+	COUNT(w.claim_id)as totale_claims
+	FROM warranty as w
+	LEFT JOIN sales as s
+	ON w.sale_id = s.sale_id
+	JOIN products as p
+	ON p.product_id = s.product_id
+	JOIN category as c
+	ON c.category_id = p.category_id
+	WHERE w.claim_date >= CURRENT_DATE - INTERVAL '2 year'
+	GROUP BY 1
+    ```
 ### Complex (5 Questions)
 
 16. Determine the percentage chance of receiving warranty claims after each purchase for each country.
