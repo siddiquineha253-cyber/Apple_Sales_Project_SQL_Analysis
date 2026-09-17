@@ -118,7 +118,12 @@ The project is split into three tiers of questions to test SQL skills of increas
 ```
    
 5. Calculate the percentage of warranty claims marked as "Warranty Void".
-8. Identify which store had the highest total units sold in the last year.
+ ```sql
+   SELECT ROUND(COUNT(claim_id)/(SELECT COUNT(*) FROM warranty)::numeric * 100,2) AS warranty_void_per
+FROM warranty
+WHERE repair_status = 'Warranty Void';
+```
+6. Identify which store had the highest total units sold in the last year.
 9. Count the number of unique products sold in the last year.
 10. Find the average price of products in each category.
 11. How many warranty claims were filed in 2020?
