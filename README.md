@@ -85,7 +85,7 @@ The project is split into three tiers of questions to test SQL skills of increas
 ```
            
    
-3. Calculate the total number of units sold by each store.
+2. Calculate the total number of units sold by each store.
  ```sql
  SELECT 
    s.store_id,
@@ -97,8 +97,14 @@ The project is split into three tiers of questions to test SQL skills of increas
    ORDER BY 3 DESC;
 ```
    
-5. Identify how many sales occurred in December 2023.
-6. Determine how many stores have never had a warranty claim filed.
+3. Identify how many sales occurred in December 2023.
+```sql
+   SELECT 
+   COUNT(sale_id)as totale_sale
+   FROM sales
+   WHERE TO_CHAR(sale_date,'MM-YYYY')='12-2023'
+```
+4. Determine how many stores have never had a warranty claim filed.
 7. Calculate the percentage of warranty claims marked as "Warranty Void".
 8. Identify which store had the highest total units sold in the last year.
 9. Count the number of unique products sold in the last year.
