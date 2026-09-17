@@ -105,7 +105,19 @@ The project is split into three tiers of questions to test SQL skills of increas
    WHERE TO_CHAR(sale_date,'MM-YYYY')='12-2023'
 ```
 4. Determine how many stores have never had a warranty claim filed.
-7. Calculate the percentage of warranty claims marked as "Warranty Void".
+  ```sql
+      SELECT COUNT(*) FROM stores
+         WHERE store_id NOT IN(
+
+                       SELECT
+                       DISTINCT store_id
+                       FROM sales AS s
+					   RIGHT JOIN warranty AS w
+                       ON s.sale_id = w.sale_id
+					   );
+    ```
+   
+5. Calculate the percentage of warranty claims marked as "Warranty Void".
 8. Identify which store had the highest total units sold in the last year.
 9. Count the number of unique products sold in the last year.
 10. Find the average price of products in each category.
