@@ -232,7 +232,7 @@ The project is split into three tiers of questions to test SQL skills of increas
 	HAVING SUM(s.quantity)>5000
 ```
 15. Identify the product category with the most warranty claims filed in the last two years.
-16. ```sql
+ ```sql
     SELECT
 	c.category_name,
 	COUNT(w.claim_id)as totale_claims
@@ -381,7 +381,7 @@ total_repaired AS
 ### Bonus Question
 
 - Analyze product sales trends over time, segmented into kevgjkolp.]sy periods: from launch to 6 months, 6-12 months, 12-18 months, and beyond 18 months.
-  ```sql
+```sql
   	SELECT
 	p.product_name,
 	CASE
@@ -396,7 +396,7 @@ total_repaired AS
 	ON s.product_id = p.product_id
 	GROUP BY 1,2
 	ORDER BY 1,3 DESC
-```
+  ```
 
 ## Project Focus
 
