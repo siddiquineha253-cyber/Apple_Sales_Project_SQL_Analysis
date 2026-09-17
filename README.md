@@ -82,7 +82,7 @@ country,COUNT(store_id) AS total_stores
 FROM stores
 GROUP BY 1
 ORDER BY 2 DESC
-```
+           
    
 3. Calculate the total number of units sold by each store.
 4. Identify how many sales occurred in December 2023.
